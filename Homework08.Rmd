@@ -1,0 +1,103 @@
+---
+title: "36-315 Homework08"
+author: "Leandro Lopez Leon (lslopez)"
+date: "Due Wednesday, April 14, 2021 (11:59pm)"
+output: 
+  html_document:
+    toc:  true
+    toc_float:  true
+    code_folding:  show
+---
+
+
+# Problem 1: Project Group Logistics (20 points)
+
+## A.
+Sunday 1900 EDT (Tentative time)
+
+## B.
+Github repository for code and data management. Individual contributions will be tracked via `git blame`. Group communications will be via Google Rooms and Zoom. (Need to discuss tentative plan + work division)
+
+
+#  Problem 2: Identify Two Potential Datasets for Group Project (20 points)
+
+## Dataset 1 
++ **Name**: International Currencies 1890-1910   
++ **Source**: Economic History Association 
++ **Link**: https://eh.net/database/international-currencies-1890-1910/
+
+## Dataset 1 
++ FILL IN 
+
+# Problem 3: Details about your first dataset (30 points)
+```{r}
+    currencies <- read.table(
+                  file = "flandreau_jobst_internationalcurrencies_data.txt",
+                  skip = 9, fill = TRUE, header = TRUE)
+    dim(currencies)
+```
+## A. 
+
+The first dataset summarizes international foreign exchange markets in the period 1890-1910. The rows correspond to 
+ordered country pairs, i.e. for every country pair there are two observations: (1) whether the foreign exchange markets in the first country 
+trade the second country’s currency and (2) whether the foreign exchange markets in the second country trade the first country’s currency.
+There is information on 45 countries/currencies, yielding a total of $45 \times 44 = 1980$ rows.  
+
+The dataset contains the following columns: 
+
++ `quote1890`, `quote1900`, `quote1910`: indicator variables, =1 if in `country_A` there is an active market for the currency of `country_B` in 1890, 1900 and 1910 respectively, and 0 otherwise.
+
++ `colony`: indicator variable =1 if `country_A` is a colony of `country_B` and 0 otherwise. 
+
++ `dist`: log distance as between the cities with foreign exchange markets in `country_A` and `country_B`. 
+
++ `bitrade`: total trade between `country_A` and `country_B` in thousand of US dollars.
+
++ `gold`: indicator variable =1 if `country_A` has a currency convertible in gold in 1900 and 0 otherwise.  
+
++ `debtburden`: Ratio of government debt over government revenues in 1900.
+
++ `rlong`: secondary market yield for gold denominated government debt in 1900.
+
++ `rshort1900`: market rate for 3 month lending, i.e. discount rate for 3 month commercial paper in 1900
+  
++ `rshort1890`: Same as above for 1890 
+
++ `rgdp` and `rgdpcap` give the log 1900 real gdp and the log real gdp per capita.  
+
++ `poldemo` index of democracy (ID) developed by Vanhanen (2000) for 1900.
+
++ `coverage` is the logarithm of the number of currencies traded in `country_A`. 
+
+
+## B. 
+
+(15pts) List at least three questions you think you will be able to answer with your dataset, and how you might answer them graphically. Each of your questions must have the following format:
+
++ **Question**: Our dataset can naturally be thought of as a network of countries with (directed) edges signifying active currency markets. 
+  What is the in-degree distribution $\mathbb{P} _ {in} (X = k)$ (probability that a randomly chosen country's currency is traded across $k$ markets) and out-degree distribution $\mathbb{P} _ {out} (X = k)$ (probability that a randomly chosen country trades $k$ currencies)? How do these distributions change across the three timeframes?
++ **Possible graph(s) to answer this question**: Histograms of in-degree and out-degree distributions overlayed with density estimates facetted by year.
+
++ **Question**:  Who are the power brokers? Who is central to the network and who is peripheral? Can we map the geography of the international monetary system? 
++ **Possible graph(s) to answer this question**: Map of the world overlayed with active currency markets network. The nodes size can be proportional to the in-degree to showcase most powerful countries 
+
++ **Question**: What is the community structure of our network? Can we cluster the countries based on macroeconomic variables? 
++ **Possible graph(s) to answer this question**: Hierarchical Clustering + Dendogram  
+
+
+# Problem 4: Details about your second dataset (30 points)
+
+a. (15pts) Write a brief (no more than two paragraphs) description of the second dataset in Problem 2. At a minimum, you must discuss:
+
++ The number of rows and number of columns in the dataset.
++ What each observation (i.e., each row) corresponds to. For example: Do they correspond to humans? To counties in the US?
++ What types of variables are in the data (i.e., a description of the columns in the dataset).
+
+If your answer suggests that you haven't taken the time to understand the rows and columns of your dataset, I may ask you to find another dataset or submit a new version of this homework.
+
+b. (15pts) List at least three questions you think you will be able to answer with your dataset, and how you might answer them graphically. Each of your questions must have the following format:
+
++ **Question**:
++ **Possible graph(s) to answer this question**:
+
+Thus, your submission for this part should include **only** six bullet points (two bullets for each question). Problem 3 provides an example. Make your questions as substantial and interesting as possible. For example, three questions about the marginal distributions of variables is not very interesting. If your questions are not substantial, I may ask you to find another dataset or submit a new version of this homework.
